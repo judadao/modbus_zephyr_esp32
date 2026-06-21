@@ -1,0 +1,5 @@
+name: modbus_zephyr_esp32
+build:
+  cmake: zephyr
+  kconfig: zephyr/Kconfig
+

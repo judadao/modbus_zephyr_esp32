@@ -1,0 +1,8 @@
+build/
+build_out/
+*.o
+*.a
+*.elf
+*.bin
+*.map
+

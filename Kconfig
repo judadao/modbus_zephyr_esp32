@@ -1,0 +1,5 @@
+mainmenu "Modbus Zephyr ESP32"
+
+source "Kconfig.zephyr"
+rsource "zephyr/Kconfig"
+

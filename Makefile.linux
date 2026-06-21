@@ -1,0 +1,31 @@
+CC      = gcc
+CFLAGS  = -Wall -Wextra -std=c11 -g -Iinclude -DCONFIG_MODBUS_ZEPHYR_ESP32
+OUTDIR  = build_out
+
+SRCS = src/modbus.c
+OBJS = $(SRCS:%.c=$(OUTDIR)/%.o)
+LIB  = $(OUTDIR)/libmodbus_zephyr_esp32.a
+UNIT = $(OUTDIR)/unit_modbus
+
+.PHONY: all clean test unit-tests
+
+all: $(LIB)
+
+$(OUTDIR):
+	mkdir -p $(OUTDIR)/src
+
+$(OUTDIR)/%.o: %.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIB): $(OBJS)
+	ar rcs $@ $(OBJS)
+
+unit-tests: $(LIB)
+	$(CC) $(CFLAGS) tests/unit_modbus.c $(SRCS) -o $(UNIT)
+	$(UNIT)
+
+test: unit-tests
+
+clean:
+	rm -rf $(OUTDIR)
+

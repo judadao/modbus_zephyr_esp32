@@ -1,0 +1,23 @@
+menuconfig MODBUS_ZEPHYR_ESP32
+	bool "Modbus Zephyr ESP32 adapter"
+	default n
+	help
+	  Enable the reusable Modbus adapter module.
+
+if MODBUS_ZEPHYR_ESP32
+
+config MODBUS_ZEPHYR_ESP32_UNIT_ID
+	int "Default Modbus unit id"
+	default 1
+	range 1 247
+
+config MODBUS_ZEPHYR_ESP32_BAUDRATE
+	int "Default RTU baudrate"
+	default 115200
+
+config MODBUS_ZEPHYR_ESP32_TCP_PORT
+	int "Default TCP port"
+	default 502
+
+endif # MODBUS_ZEPHYR_ESP32
+
