@@ -1,0 +1,7 @@
+{
+  "repo_type": "module",
+  "name": "modbus_zephyr_esp32",
+  "module_kind": "protocol_adapter",
+  "product_dependency_allowed": true
+}
+
