@@ -19,15 +19,15 @@ items:
 - id: rtu-transport
   area: protocol
   title: Implement real Modbus RTU transport behind the public API.
-  status: todo
+  status: done
 - id: tcp-transport
   area: protocol
   title: Implement real Modbus TCP transport behind the public API.
-  status: todo
+  status: done
 - id: parser-crc-tests
   area: validation
   title: Add parser, CRC, exception response, and timeout unit coverage.
-  status: todo
+  status: done
 - id: zephyr-smoke
   area: validation
   title: Add a Zephyr module metadata smoke script matching the golden sample.
@@ -37,7 +37,7 @@ items:
   area: performance
   title: Review frame buffer allocation and reuse fixed buffers for bounded embedded
     memory behavior.
-  status: todo
+  status: done
 - id: pass-golden-structure-audit
   area: repo
   title: Refactor repository until it passes the module golden sample structure audit.

@@ -10,14 +10,14 @@ Source of truth: `docs/todo.yaml`. Update YAML before starting or completing wor
 
 ## protocol
 
-- [ ] Implement real Modbus RTU transport behind the public API.
-- [ ] Implement real Modbus TCP transport behind the public API.
+- [x] Implement real Modbus RTU transport behind the public API.
+- [x] Implement real Modbus TCP transport behind the public API.
 
 ## validation
 
-- [ ] Add parser, CRC, exception response, and timeout unit coverage.
+- [x] Add parser, CRC, exception response, and timeout unit coverage.
 - [x] Add a Zephyr module metadata smoke script matching the golden sample.
 
 ## performance
 
-- [ ] Review frame buffer allocation and reuse fixed buffers for bounded embedded memory behavior.
+- [x] Review frame buffer allocation and reuse fixed buffers for bounded embedded memory behavior.
