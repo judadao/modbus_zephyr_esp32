@@ -7,7 +7,13 @@ requests, validates responses, handles exception frames, and delegates actual
 transport to a caller-provided callback. That keeps UART, TCP, Zephyr driver,
 and Linux fake transport code outside the portable Modbus core.
 
-## Why This Exists
+## Overview
+
+Use this repo when code needs Modbus framing/parsing but should choose its own
+transport. The module provides the protocol-safe core; the caller provides UART,
+TCP, Zephyr driver, or Linux fake transport behavior.
+
+## Key Value
 
 - Products need Modbus behavior without embedding transport-specific logic.
 - Linux tests can validate framing and parsing before ESP32 hardware is ready.
@@ -15,7 +21,7 @@ and Linux fake transport code outside the portable Modbus core.
 - Higher-level modules such as `dephy_iot` and `dephy_industrial_io` can reuse
   the same Modbus boundary.
 
-## Normal Flow
+## How To Use
 
 1. Configure Modbus mode, unit ID, and timing in the caller.
 2. Provide a transport callback that sends bytes and returns received bytes.
