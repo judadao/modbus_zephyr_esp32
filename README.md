@@ -2,9 +2,45 @@
 
 Reusable Modbus adapter module for Linux development and Zephyr/ESP32 builds.
 
-The module owns Modbus configuration validation, RTU/TCP request framing,
-caller-provided transport callbacks, CRC validation, exception response
-handling, and bounded fixed-buffer behavior.
+`modbus_zephyr_esp32` owns the Modbus frame boundary. It builds RTU/TCP
+requests, validates responses, handles exception frames, and delegates actual
+transport to a caller-provided callback. That keeps UART, TCP, Zephyr driver,
+and Linux fake transport code outside the portable Modbus core.
+
+## Why This Exists
+
+- Products need Modbus behavior without embedding transport-specific logic.
+- Linux tests can validate framing and parsing before ESP32 hardware is ready.
+- RTU and TCP modes share bounded buffer handling and response validation.
+- Higher-level modules such as `dephy_iot` and `dephy_industrial_io` can reuse
+  the same Modbus boundary.
+
+## Normal Flow
+
+1. Configure Modbus mode, unit ID, and timing in the caller.
+2. Provide a transport callback that sends bytes and returns received bytes.
+3. Call `modbus_zephyr_esp32_transfer()` with a PDU payload.
+4. The module builds the wire frame, calls the transport, validates the reply,
+   and returns the response PDU.
+
+Example:
+
+```c
+struct modbus_zephyr_esp32_transport transport = {
+    .transfer = my_transfer,
+    .user = my_context,
+};
+
+modbus_zephyr_esp32_set_transport(&transport);
+modbus_zephyr_esp32_transfer(3, payload, payload_len, &response);
+```
+
+## How It Works
+
+The portable core never opens UART or sockets directly. It owns deterministic
+frame construction and parsing, then calls the registered transport. For RTU it
+adds and checks CRC16. For TCP it handles MBAP-style framing. Transport can be a
+Linux fake, TCP socket, Zephyr UART driver, or future ESP32-specific adapter.
 
 ## Layout
 
@@ -23,23 +59,6 @@ Makefile.linux                        Linux build/test
 make -f Makefile.linux test
 scripts/test_zephyr_module.sh
 ```
-
-## Public Boundary
-
-`modbus_zephyr_esp32_transfer()` builds RTU or TCP frames into a fixed internal
-buffer and calls a user-provided transport callback:
-
-```c
-struct modbus_zephyr_esp32_transport transport = {
-    .transfer = my_transfer,
-    .user = my_context,
-};
-
-modbus_zephyr_esp32_set_transport(&transport);
-modbus_zephyr_esp32_transfer(3, payload, payload_len, &response);
-```
-
-The transport can be UART, TCP socket, Zephyr driver code, or a Linux test fake.
 
 ## Zephyr
 
