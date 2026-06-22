@@ -61,3 +61,8 @@ This module owns protocol correctness. The caller owns how bytes move.
 
 - `docs/module_structure.md`: public API and module layout.
 - `docs/todo.md`: current TODO summary.
+
+## License
+
+MIT. See `LICENSE` and `NOTICE.md`. Reuse and references are allowed, but the
+copyright notice and attribution to Judd (judadao) must be preserved.
