@@ -1,25 +1,27 @@
 # modbus_zephyr_esp32
 
-Reusable Modbus adapter module for Linux development and Zephyr/ESP32 builds.
+Reusable Modbus RTU/TCP adapter module for Linux and Zephyr/ESP32.
 
 ## Overview
 
-`modbus_zephyr_esp32` builds and validates Modbus RTU/TCP frames while leaving
-transport to the caller. The same core can run with Linux fakes, sockets, Zephyr
-UART, or future ESP32 adapters.
+`modbus_zephyr_esp32` owns Modbus protocol framing and response validation. The
+caller supplies the byte transport, so the same module can run with Linux fakes,
+TCP sockets, Zephyr UART, or an ESP32-specific transport.
 
 ## Key Value
 
-- Shared Modbus framing and response validation.
-- Caller-provided transport callback.
-- Linux tests before target hardware is ready.
-- Reusable boundary for higher-level IoT and IO modules.
+- RTU and TCP request framing.
+- CRC16 validation for RTU responses.
+- MBAP/TCP response parsing.
+- Exception response and timeout coverage.
+- Fixed reusable frame buffer for bounded embedded memory behavior.
 
 ## How To Use
 
 ```c
+modbus_zephyr_esp32_configure(&config);
 modbus_zephyr_esp32_set_transport(&transport);
-modbus_zephyr_esp32_transfer(3, payload, payload_len, &response);
+modbus_zephyr_esp32_transfer(function, payload, payload_len, &response);
 ```
 
 ```sh
@@ -27,10 +29,35 @@ make -f Makefile.linux test
 scripts/test_zephyr_module.sh
 ```
 
+## Architecture Flow
+
+```mermaid
+flowchart LR
+    Caller[IoT or IO module] --> API[Modbus public API]
+    API --> Frame[RTU/TCP frame builder]
+    Frame --> Transport[caller transport callback]
+    Transport --> Device[Modbus device or fake]
+    Device --> Parser[response parser]
+    Parser --> Caller
+```
+
+## Example User Scenario
+
+```mermaid
+flowchart TD
+    A[Product wants register value] --> B[Build read-register PDU]
+    B --> C[Module wraps RTU or TCP frame]
+    C --> D[Transport sends bytes]
+    D --> E[Device responds]
+    E --> F[Module validates CRC/header]
+    F --> G[Product receives response payload]
+```
+
 ## Simple Principle
 
-The module owns protocol correctness. The caller owns byte transport.
+This module owns protocol correctness. The caller owns how bytes move.
 
 ## Docs
 
+- `docs/module_structure.md`: public API and module layout.
 - `docs/todo.md`: current TODO summary.
