@@ -1,7 +1,7 @@
 {
   "repo_type": "module",
   "name": "modbus_zephyr_esp32",
-  "description": "Reusable Modbus RTU/TCP framing and response validation module for Linux and Zephyr/ESP32.",
+  "description": "Reusable Modbus RTU/TCP module for Linux and Zephyr ESP32, covering request framing, CRC, response validation, and transport boundaries.",
   "module_kind": "protocol_adapter",
   "product_dependency_allowed": true,
   "license": "MIT",
@@ -12,6 +12,8 @@
     "rtu",
     "tcp",
     "zephyr",
-    "esp32"
+    "esp32",
+    "industrial-protocols",
+    "embedded-c"
   ]
 }
