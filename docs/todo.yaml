@@ -44,3 +44,11 @@ items:
   status: done
   notes: Added docs/module_structure.md and Zephyr smoke script; module passes golden
     structure audit.
+- id: cppcheck-cleanup
+  area: validation
+  title: Clean up cppcheck style findings in Modbus transfer and unit timeout coverage.
+  status: done
+  notes: cppcheck reported reducible CRC scope and a redundant fake.rc assignment
+    in the RTU/TCP transfer unit path. Reduced CRC scope and added an explicit
+    suppression for the fake transport timeout reset because the callback consumes
+    fake.rc during the timeout assertion.

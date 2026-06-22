@@ -17,6 +17,7 @@ Source of truth: `docs/todo.yaml`. Update YAML before starting or completing wor
 
 - [x] Add parser, CRC, exception response, and timeout unit coverage.
 - [x] Add a Zephyr module metadata smoke script matching the golden sample.
+- [x] Clean up cppcheck style findings in Modbus transfer and unit timeout coverage.
 
 ## performance
 

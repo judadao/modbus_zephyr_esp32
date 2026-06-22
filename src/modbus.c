@@ -159,7 +159,6 @@ int modbus_zephyr_esp32_transfer(unsigned char function,
 {
     unsigned int request_len;
     unsigned int response_len = 0u;
-    unsigned short crc;
     int rc;
 
     if (!configured || active_transport.transfer == 0 || response == 0 ||
@@ -179,7 +178,7 @@ int modbus_zephyr_esp32_transfer(unsigned char function,
             memcpy(&frame_buffer[2], payload, payload_len);
         }
         request_len = payload_len + 2u;
-        crc = modbus_zephyr_esp32_crc16(frame_buffer, request_len);
+        unsigned short crc = modbus_zephyr_esp32_crc16(frame_buffer, request_len);
         frame_buffer[request_len++] = (unsigned char)(crc & 0xffu);
         frame_buffer[request_len++] = (unsigned char)(crc >> 8);
     } else {

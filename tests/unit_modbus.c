@@ -144,6 +144,7 @@ int main(void)
                MODBUS_ZEPHYR_ESP32_ERR_TIMEOUT,
            "transport timeout is returned");
 
+    /* cppcheck-suppress redundantAssignment ; fake_transfer() consumes fake.rc above. */
     fake.rc = MODBUS_ZEPHYR_ESP32_OK;
     ASSERT(modbus_zephyr_esp32_init(&tcp) == MODBUS_ZEPHYR_ESP32_OK,
            "tcp config restored");
