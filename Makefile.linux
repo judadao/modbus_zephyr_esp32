@@ -7,7 +7,7 @@ OBJS = $(SRCS:%.c=$(OUTDIR)/%.o)
 LIB  = $(OUTDIR)/libmodbus_zephyr_esp32.a
 UNIT = $(OUTDIR)/unit_modbus
 
-.PHONY: all clean test unit-tests
+.PHONY: all clean test unit-tests zephyr-smoke
 
 all: $(LIB)
 
@@ -24,8 +24,10 @@ unit-tests: $(LIB)
 	$(CC) $(CFLAGS) tests/unit_modbus.c $(SRCS) -o $(UNIT)
 	$(UNIT)
 
-test: unit-tests
+zephyr-smoke:
+	./scripts/test_zephyr_module.sh
+
+test: unit-tests zephyr-smoke
 
 clean:
 	rm -rf $(OUTDIR)
-

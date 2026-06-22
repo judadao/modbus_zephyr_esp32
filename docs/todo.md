@@ -5,7 +5,8 @@ Source of truth: `docs/todo.yaml`. Update YAML before starting or completing wor
 ## repo
 
 - [x] Add docs/todo.yaml so the Modbus Zephyr module is tracked globally.
-- [ ] Align repository docs, public API layout, and validation scripts with dephy_module_golden_sample.
+- [x] Align repository docs, public API layout, and validation scripts with dephy_module_golden_sample.
+- [x] Refactor repository until it passes the module golden sample structure audit.
 
 ## protocol
 
@@ -15,7 +16,7 @@ Source of truth: `docs/todo.yaml`. Update YAML before starting or completing wor
 ## validation
 
 - [ ] Add parser, CRC, exception response, and timeout unit coverage.
-- [ ] Add a Zephyr module metadata smoke script matching the golden sample.
+- [x] Add a Zephyr module metadata smoke script matching the golden sample.
 
 ## performance
 

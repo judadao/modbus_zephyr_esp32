@@ -14,7 +14,8 @@ items:
 - id: align-golden-sample
   area: repo
   title: Align repository docs, public API layout, and validation scripts with dephy_module_golden_sample.
-  status: todo
+  status: done
+  notes: Repository now passes dephy_module_golden_sample/scripts/audit_module_structure.sh.
 - id: rtu-transport
   area: protocol
   title: Implement real Modbus RTU transport behind the public API.
@@ -30,8 +31,16 @@ items:
 - id: zephyr-smoke
   area: validation
   title: Add a Zephyr module metadata smoke script matching the golden sample.
-  status: todo
+  status: done
+  notes: Added scripts/test_zephyr_module.sh and wired it into Makefile.linux test.
 - id: frame-buffer-reuse
   area: performance
-  title: Review frame buffer allocation and reuse fixed buffers for bounded embedded memory behavior.
+  title: Review frame buffer allocation and reuse fixed buffers for bounded embedded
+    memory behavior.
   status: todo
+- id: pass-golden-structure-audit
+  area: repo
+  title: Refactor repository until it passes the module golden sample structure audit.
+  status: done
+  notes: Added docs/module_structure.md and Zephyr smoke script; module passes golden
+    structure audit.
