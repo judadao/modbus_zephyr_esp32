@@ -1,0 +1,37 @@
+version: 1
+policy:
+  source_of_truth: docs/todo.yaml
+  rules:
+  - Use dephy_todo as the global TODO entry point.
+  - Before starting work, add or update the relevant TODO item.
+  - When behavior changes, update TODO status in the same change.
+  - Keep docs/todo.md as a human-readable summary generated from this file.
+items:
+- id: todo-yaml-source
+  area: repo
+  title: Add docs/todo.yaml so the Modbus Zephyr module is tracked globally.
+  status: done
+- id: align-golden-sample
+  area: repo
+  title: Align repository docs, public API layout, and validation scripts with dephy_module_golden_sample.
+  status: todo
+- id: rtu-transport
+  area: protocol
+  title: Implement real Modbus RTU transport behind the public API.
+  status: todo
+- id: tcp-transport
+  area: protocol
+  title: Implement real Modbus TCP transport behind the public API.
+  status: todo
+- id: parser-crc-tests
+  area: validation
+  title: Add parser, CRC, exception response, and timeout unit coverage.
+  status: todo
+- id: zephyr-smoke
+  area: validation
+  title: Add a Zephyr module metadata smoke script matching the golden sample.
+  status: todo
+- id: frame-buffer-reuse
+  area: performance
+  title: Review frame buffer allocation and reuse fixed buffers for bounded embedded memory behavior.
+  status: todo
