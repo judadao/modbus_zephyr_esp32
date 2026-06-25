@@ -57,6 +57,21 @@ flowchart TD
 
 This module owns protocol correctness. The caller owns how bytes move.
 
+## Systematic Regression Testing
+
+From the workspace root, run the shared pytest regression module:
+
+```sh
+../dephy_testkit/.venv/bin/python -m pytest ../dephy_testkit/tests/regression --module modbus_zephyr_esp32
+../dephy_testkit/.venv/bin/python -m pytest ../dephy_testkit/tests/regression --module modbus_zephyr_esp32 --profile integration
+```
+
+The local repo test remains:
+
+```sh
+make -f Makefile.linux test
+```
+
 ## Docs
 
 - `docs/module_structure.md`: public API and module layout.
